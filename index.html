@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+
+ <title>Servicio  que descargue y muestre datos JSON </title>
+<link rel="stylesheet" href="css/index.css">
+</head>
+
+<body onload="descargaDatos()">
+
+ <h1>Servicio que recibe y devuelve JSON</h1>
+ 
+ <p><button onclick="envia()">Envía JSON</button></p>
+
+   <p>
+  <label>
+   Apellido
+   <!-- Muestra la propiedad apellido del objeto descargado, usando la propiedad
+    value del input. -->
+   <output name="apellido" type="text">
+  </label>
+ </p>
+
+    <p>
+    <label>
+    Nombre
+    <!-- Muestra la propiedad nombre del objeto descargado, usando la propiedad
+        value del input. -->
+    <output name="nombre" type="text">
+    </label>
+
+ <script type="module">
+
+  import { exportaAHtml } from "./lib/js/exportaAHtml.js"
+  import { muestraError } from "./lib/js/muestraError.js"
+  import { enviaJson } from "./lib/js/enviaJson.js"
+  import { muestraObjeto } from "./lib/js/muestraObjeto.js"
+    import { consumeJson } from "./lib/js/consumeJson.js"
+
+
+  async function envia() {
+  try {
+    const respuesta = await consumeJson("srv/json.php");
+
+    alert("Apellido: " + respuesta.body.apellido.value + "\nNombre: " + respuesta.body.nombre.value);
+
+  } catch (error) {
+    muestraError(error);
+  }
+} exportaAHtml(envia)
+
+   async function descargaDatos() {
+  try {
+   const respuesta = await consumeJson("srv/json.php")
+   muestraObjeto(document, respuesta.body)
+  } catch (error) {
+   muestraError(error)
+  }
+ }  exportaAHtml(descargaDatos)
+
+ </script>
+
+</body>
+
+</html>
