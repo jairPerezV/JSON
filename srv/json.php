@@ -6,6 +6,6 @@ require_once __DIR__ . "/../lib/php/devuelveJson.php";
 $json = recuperaJson();
 
 devuelveJson([
-"nombre" => ["value" => "Miguel Angel"],
- "apellido" => ["value" => "Avalos Rama"],
+    "nombre" => ["value" => "Jair"],
+    "apellido" => ["value" => "Pérez Vidal"],
 ]);
